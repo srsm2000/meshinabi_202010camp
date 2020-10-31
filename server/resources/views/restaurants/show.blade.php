@@ -34,7 +34,8 @@
             </tr>
         </tbody>
     </table>
-    
+
     <a href="{{ action('RestaurantController@index') }}">戻る</a>    
+    {{-- urlをコントローラーのアクションで指定できる --}}
 </body>
 </html>
