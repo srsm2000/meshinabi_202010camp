@@ -7,6 +7,7 @@
         {{-- mbはマージンボトム、mtはmargin top --}}
         <colgroup span="1" style="width:200px;background-color:#efefef;"></colgroup>
         {{-- colgroupはカラムを設定するときに使う。 --}}
+        @include('layouts.restaurant', compact('restaurant'))
         <tbody>
             <tr>
                 <th>店名</th>
@@ -18,6 +19,10 @@
             <tr>
                 <th>住所</th>
                 <td>{{ $restaurant->address }}</td>
+            </tr>
+            <tr>
+                <th>カテゴリー</th>
+                <td>{{ $restaurant->category->name }}</td>
             </tr>
             <tr>
                 <th>営業時間</th>
