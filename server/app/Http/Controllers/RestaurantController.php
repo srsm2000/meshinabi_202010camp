@@ -20,7 +20,7 @@ class RestaurantController extends Controller
             $query->whereHas('category', function($q) use ($category){ $q->where('name', 'like', '%' . $category . '%');
             });
         }
-        $restaurants = $query->simplePaginate(10);
+        $restaurants = $query->simplePaginate(5);
         // 2ページ目以降も検索が反映されるようにする
         $restaurants->appends(compact('name', 'category'));
 
