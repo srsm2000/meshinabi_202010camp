@@ -7,9 +7,31 @@ use App\Restaurant;
 
 class RestaurantController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::all();
+        $name = $request->name;
+        $category = $request->category;
+
+        $query = Restaurant::query();
+        if($name) {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+        if($category) {
+            $query->where('category', 'like', '%' . $category . '%');
+        }
+        $restaurants = $query->simplePaginate(10);
+        // 2ページ目以降も検索が反映されるようにする
+        $restaurants->appends(compact('name', 'category'));
+
+        // 検索方法（拡張性がない）
+        // if(!empty($name)) {
+        //     $restaurants = Restaurant::where('name', 'like', '%' . $name . '%');
+        //     nameで検索します。like
+        // } else {
+        //     $restaurants = Restaurant::all();
+        // }
+
+        // $restaurants = Restaurant::simplepaginate(10);
         return view('restaurants.index', compact('restaurants'));
     }
 
